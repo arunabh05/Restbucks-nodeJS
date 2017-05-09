@@ -1,0 +1,146 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Orders API
+
+Order is a simple API allowing restbucks owner to place orders.
+
+## Orders Collection [/orders/]
+
+### Place a New Order [POST] 
+
+You may create your a new order using this action. It takes a JSON
+object containing a order details.
+
++ Request (application/json)
+
+        {
+            "location": "take-out",
+            "items": [
+                        {
+                            "qty": 1,
+                            "name": "latte",
+                            "milk": "whole",
+                            "size": "large"
+                        }
+                    ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /orders/5912475bda0da131987626f4
+
+    + Body
+
+            {
+                "__v": 0,
+                "location": "take-out",
+                "status": "PLACED",
+                "message": "Your order has been placed",
+                "_id": "5912475bda0da131987626f4",
+                "items": [
+                            {
+                                "qty": 1,
+                                "size": "large",
+                                "milk": "whole",
+                                "name": "latte"
+                            }
+                        ]
+            }
+
++ Response 400 (application/json)
+
+    + Body
+
+            {
+                "location": "take-out",
+                "items": [
+                            {
+                                "qty": 1,
+                                "name": "latte",
+                                "milk": "whole",
+                                "size": "large"
+                            }
+                        ]
+            }
+            
+
+### Get Order Details [GET] 
+
+You may get your order detals using this action. It takes a Order ID as a parameter and
+returns the order details.
+
+
++ Response 200 (application/json)
+
+        
+        {
+            "_id": "58f01dd46ca8801aa8ad1e1a",
+            "location": "dine-in",
+            "status": "PREPARING",
+            "message": "Your order has been placed",
+            "__v": 1,
+            "items": [
+                        {
+                            "size": "large",
+                            "milk": "whole",
+                            "name": "latte",
+                            "qty": 1
+                        }
+                    ]
+        }
+
++ Response 404 (application/json)
+
+
+### Update an Order [PUT] 
+
+You may update your order using this action. It takes a JSON
+object containing updated order details.
+
++ Request (application/json)
+
+        {
+            "location": "take-out",
+            "items": [
+                        {
+                            "qty": 1,
+                            "name": "latte",
+                            "milk": "whole",
+                            "size": "small"
+                        }
+                    ]
+        }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "_id": "591249192dfef631a4405969",
+                "location": "dine-in",
+                "status": "PREPARING",
+                "message": "Your order has been updated",
+                "__v": 1,
+                "items": [
+                            {
+                                "size": "small",
+                                "milk": "whole",
+                                "name": "latte",
+                                "qty": 1
+                            }
+                        ]
+            }
+
++ Response 412 (application/json)
+
+            
+### Cancel an Order [DELETE] 
+
+You may cancel your order using this action. It takes order ID as parameter.
+
++ Response 204 (application/json)
+
++ Response 404 (application/json)
