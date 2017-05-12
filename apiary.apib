@@ -4,7 +4,7 @@ FORMAT: 1A
 
 Order is a simple API allowing restbucks owner to place orders.
 
-## Orders Collection [/orders/]
+## Orders Collection [/orders]
 
 ### Place a New Order [POST] 
 
@@ -14,7 +14,7 @@ object containing a order details.
 + Request (application/json)
 
         {
-            "location": "take-out",
+            "location": "San Francisco",
             "items": [
                         {
                             "qty": 1,
@@ -35,7 +35,7 @@ object containing a order details.
 
             {
                 "__v": 0,
-                "location": "take-out",
+                "location": "San Francisco",
                 "status": "PLACED",
                 "message": "Your order has been placed",
                 "_id": "5912475bda0da131987626f4",
@@ -47,6 +47,12 @@ object containing a order details.
                                 "name": "latte"
                             }
                         ]
+                "links":[
+                                "get":"/orders/5912475bda0da131987626f4"
+                                "pay":"/orders/5912475bda0da131987626f4/pay"
+                                "delete":"/orders/5912475bda0da131987626f4"
+                                "update":"/orders/5912475bda0da131987626f4"
+                        ]
             }
 
 + Response 400 (application/json)
@@ -54,7 +60,7 @@ object containing a order details.
     + Body
 
             {
-                "location": "take-out",
+                "location": "San Francisco",
                 "items": [
                             {
                                 "qty": 1,
@@ -77,7 +83,7 @@ returns the order details.
         
         {
             "_id": "58f01dd46ca8801aa8ad1e1a",
-            "location": "dine-in",
+            "location": "San Francisco",
             "status": "PREPARING",
             "message": "Your order has been placed",
             "__v": 1,
@@ -102,7 +108,7 @@ object containing updated order details.
 + Request (application/json)
 
         {
-            "location": "take-out",
+            "location": "San Francisco",
             "items": [
                         {
                             "qty": 1,
@@ -119,7 +125,7 @@ object containing updated order details.
 
             {
                 "_id": "591249192dfef631a4405969",
-                "location": "dine-in",
+                "location": "San Francisco",
                 "status": "PREPARING",
                 "message": "Your order has been updated",
                 "__v": 1,
