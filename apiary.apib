@@ -1,7 +1,6 @@
 FORMAT: 1A
 
 # Orders API
-
 Order is a simple API allowing restbucks owner to place orders.
 
 ## Orders Collection [/orders]
@@ -29,8 +28,8 @@ You may get all orders using this action.
             }
         ]
 
-### Place a New Order [POST] 
 
+### Place a New Order [POST]
 You may create your a new order using this action. It takes a JSON
 object containing a order details.
 
@@ -53,7 +52,7 @@ object containing a order details.
     + Headers
 
             Location: /orders/5912475bda0da131987626f4
-
+            
     + Body
 
             {
@@ -101,8 +100,8 @@ object containing a order details.
 + Parameters
     + order_id (number) - ID of the Order in the form of an integer
 
-### Get Order Details [GET] 
 
+### Get Order Details [GET]
 You may get your order detals using this action. It takes a Order ID as a parameter and
 returns the order details.
     
@@ -127,8 +126,8 @@ returns the order details.
 
 + Response 404
 
-### Update an Order [PUT] 
 
+### Update an Order [PUT]
 You may update your order using this action. It takes a JSON
 object containing updated order details.
 
@@ -168,21 +167,20 @@ object containing updated order details.
 
 + Response 412
 
-            
-### Cancel an Order [DELETE] 
 
+### Cancel an Order [DELETE]
 You may cancel your order using this action. It takes order ID as parameter.
 
 + Response 204 
 
 + Response 404
 
+## Pay [/orders/{order_id}/pay]
++ Parameters
+    + order_id (number) - ID of the Order in the form of an integer
 
 
-## Pay [/orders/{order_id}/pay] 
-
-### Pay for an Order [POST] 
-
+### Pay for an Order [POST]
 You may pay for your order using this action. It takes order ID as parameter.
 
 + Response 200 
@@ -203,7 +201,6 @@ You may pay for your order using this action. It takes order ID as parameter.
                             }
                         ]
             }
-
 
 + Response 404
 
