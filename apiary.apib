@@ -6,6 +6,29 @@ Order is a simple API allowing restbucks owner to place orders.
 
 ## Orders Collection [/orders]
 
+### Get All Orders [GET]
+You may get all orders using this action.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "58f01dd46ca8801aa8ad1e1a",
+                "location": "San Francisco",
+                "status": "PREPARING",
+                "message": "Your order has been placed",
+                "__v": 1,
+                "items": [
+                            {
+                                "size": "large",
+                                "milk": "whole",
+                                "name": "latte",
+                                "qty": 1
+                            }
+                        ]
+            }
+        ]
+
 ### Place a New Order [POST] 
 
 You may create your a new order using this action. It takes a JSON
@@ -74,12 +97,15 @@ object containing a order details.
             }
             
 
+## Order [/orders/{order_id}]
++ Parameters
+    + order_id (number) - ID of the Order in the form of an integer
+
 ### Get Order Details [GET] 
 
 You may get your order detals using this action. It takes a Order ID as a parameter and
 returns the order details.
-
-
+    
 + Response 200 (application/json)
 
         
@@ -99,8 +125,7 @@ returns the order details.
                     ]
         }
 
-+ Response 404 (application/json)
-
++ Response 404
 
 ### Update an Order [PUT] 
 
@@ -141,13 +166,13 @@ object containing updated order details.
                         ]
             }
 
-+ Response 412 (application/json)
++ Response 412
 
             
 ### Cancel an Order [DELETE] 
 
 You may cancel your order using this action. It takes order ID as parameter.
 
-+ Response 204 (application/json)
++ Response 204 
 
-+ Response 404 (application/json)
++ Response 404
