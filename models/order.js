@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/restbucks');
-
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://10.0.30.15:27017/restbucks');
 var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
@@ -9,6 +9,7 @@ var orderSchema = new Schema({
 	items : Array,
 	status : String,
 	message : String,
+	amount : Number
 });
 
 orderSchema.methods.updateStatus = function(status){

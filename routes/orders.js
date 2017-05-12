@@ -12,7 +12,7 @@ var getAllOrders = function(req, res) {
 		if (orders === undefined) {
 			res.status(404).send();
 		} else {
-			res.status(200).send(orders);
+			res.status(200).send({orders:orders});
 		}
 	});
 };

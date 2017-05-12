@@ -1,6 +1,9 @@
 var Orders = require('../models/order');
 var ObjectId = require('mongoose').Types.ObjectId;
 
+var IP = 'http://13.56.47.200';
+var port = ':3000';
+
 var getOrder = function(req, res) {
 	var orderID = req.param("id");
 
@@ -26,13 +29,11 @@ var newOrder = function(req, res) {
 	} else {
 		if (orderDetails.items !== undefined) {
 			var flag = 0;
-			
 			var items = orderDetails.items;
 			for (var i = 0; i < items.length; i++) {
-
+			
 				if (items[i].size === undefined || items[i].name === undefined
-						|| items[i].qty === undefined
-						|| items[i].milk === undefined) {
+						|| items[i].qty === undefined || items[i].milk === undefined) {
 					flag = 1;
 				}
 			}
@@ -46,11 +47,17 @@ var newOrder = function(req, res) {
 					if (err) {
 						res.status(500).send();
 						throw err;
-					} else {
-						res.location('http://localhost:3000/orders/' + order._id);
-						res.status(201).send(order);
+					} else {		
+						orderDetails._id = order._id;
+						orderDetails.links = [ { get : IP + port + '/orders/' + order._id },
+                        				 	       { pay : IP + port + '/orders/' + order._id + '/pay' },
+                        					       { delete : IP + port + '/orders/' + order._id }
+								       { update : IP + port + '/orders/' + order._id }];
+						res.location('/orders/'+ order_.id);
+						res.status(201).send(orderDetails);
+
 					}
-				});
+				});				
 			} else {
 				res.status(400).send(orderDetails);
 			}
