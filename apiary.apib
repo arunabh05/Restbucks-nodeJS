@@ -176,3 +176,35 @@ You may cancel your order using this action. It takes order ID as parameter.
 + Response 204 
 
 + Response 404
+
+
+
+## Pay [/orders/{order_id}/pay] 
+
+### Pay for an Order [POST] 
+
+You may pay for your order using this action. It takes order ID as parameter.
+
++ Response 200 
+    + Body
+
+            {
+                "_id": "591249192dfef631a4405969",
+                "location": "San Francisco",
+                "status": "PAID",
+                "message": "Your payment has been accepted.",
+                "__v": 1,
+                "items": [
+                            {
+                                "size": "small",
+                                "milk": "whole",
+                                "name": "latte",
+                                "qty": 1
+                            }
+                        ]
+            }
+
+
++ Response 404
+
++ Response 412
