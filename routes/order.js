@@ -15,7 +15,13 @@ var getOrder = function(req, res) {
 		if (order === null) {
 			res.status(404).send();
 		} else {
-			res.status(200).send(order);
+                     	order = order.toJSON(); 
+			order.links = [{ get : '/orders/' + order._id ,
+                          	     	 pay : '/orders/' + order._id + '/pay' ,
+                                         delete : '/orders/' + order._id ,
+                                         update : '/orders/' + order._id }];
+			res.location('/orders/'+ order._id);
+                        res.status(200).send({order:order});	
 		}
 	});
 };
@@ -25,7 +31,7 @@ var newOrder = function(req, res) {
 	var orderDetails = req.body;
 
 	if (orderDetails.location === undefined || orderDetails.items === undefined) {
-		res.status(400).send(orderDetails);
+		res.status(400).send({order:orderDetails});
 	} else {
 		if (orderDetails.items !== undefined) {
 			var flag = 0;
@@ -49,17 +55,17 @@ var newOrder = function(req, res) {
 						throw err;
 					} else {		
 						orderDetails._id = order._id;
-						orderDetails.links = [ { get : IP + port + '/orders/' + order._id },
-                        				 	       { pay : IP + port + '/orders/' + order._id + '/pay' },
-                        					       { delete : IP + port + '/orders/' + order._id }
-								       { update : IP + port + '/orders/' + order._id }];
-						res.location('/orders/'+ order_.id);
-						res.status(201).send(orderDetails);
+						orderDetails.links = [{ get : '/orders/' + order._id ,
+                        				 	        pay : '/orders/' + order._id + '/pay',
+                        					        delete : '/orders/' + order._id ,
+								        update : '/orders/' + order._id }];
+						res.location('/orders/'+ order._id);
+						res.status(201).send({order:orderDetails});
 
 					}
 				});				
 			} else {
-				res.status(400).send(orderDetails);
+				res.status(400).send({order:orderDetails});
 			}
 		}
 	}
@@ -87,7 +93,7 @@ var updateOrder = function(req, res) {
 					res.status(500).send();
 					throw err;
 				} else {
-					res.status(200).send(order);
+					res.status(200).send({order:order});
 				}
 			});
 		}
@@ -118,6 +124,6 @@ var deleteOrder = function(req, res) {
 };
 
 exports.getOrder = getOrder;
-exports.newOrder = newOrder;
 exports.updateOrder = updateOrder;
-exports.deleteOrder = deleteOrder;
+exports.deleteOrder =  deleteOrder;
+exports.newOrder = newOrder;
