@@ -3,14 +3,18 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "express": "4.15.5",
     "ejs": "*",
-    "express-session" : "*",
-    "mongodb" : "*",
-    "connect-mongo" : "*",
-    "mongoose" : "*"
-  }
+    "express-session": "*",
+    "mongodb": "*",
+    "connect-mongo": "*",
+    "mongoose": "*",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
